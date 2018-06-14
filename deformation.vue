@@ -44,6 +44,10 @@
         type: [Boolean, Number],
         default: true
       },
+      move: { // 是否可以整体移动
+        type: Boolean,
+        default: true
+      },
       resizable: { // 是否可改变大小
         type: [Boolean, Number],
         default: true
@@ -244,14 +248,16 @@
           this.height = (Math.round(this.elmH / this.grid[1]) * this.grid[1])
           this.$emit('resizing', this.left, this.top, this.width, this.height)
         } else if (this.dragging) {
-          if (this.parent) {
-            if (this.elmX + dX < this.parentX) this.mouseOffX = (dX - (diffX = this.parentX - this.elmX))
-            else if (this.elmX + this.elmW + dX > this.parentW) this.mouseOffX = (dX - (diffX = this.parentW - this.elmX - this.elmW))
-            if (this.elmY + dY < this.parentY) this.mouseOffY = (dY - (diffY = this.parentY - this.elmY))
-            else if (this.elmY + this.elmH + dY > this.parentH) this.mouseOffY = (dY - (diffY = this.parentH - this.elmY - this.elmH))
+          if (this.move) {
+            if (this.parent) {
+              if (this.elmX + dX < this.parentX) this.mouseOffX = (dX - (diffX = this.parentX - this.elmX))
+              else if (this.elmX + this.elmW + dX > this.parentW) this.mouseOffX = (dX - (diffX = this.parentW - this.elmX - this.elmW))
+              if (this.elmY + dY < this.parentY) this.mouseOffY = (dY - (diffY = this.parentY - this.elmY))
+              else if (this.elmY + this.elmH + dY > this.parentH) this.mouseOffY = (dY - (diffY = this.parentH - this.elmY - this.elmH))
+            }
+            this.elmX += diffX
+            this.elmY += diffY
           }
-          this.elmX += diffX
-          this.elmY += diffY
           if (this.draggable === 2 || this.draggable === 1 || this.draggable === true) {
             this.left = (Math.round(this.elmX / this.grid[0]) * this.grid[0])
           }

@@ -117,6 +117,13 @@ export default {
 <Deformation :resizable="false">
 ```
 
+#### move
+类型: `Boolean`<br>
+必要性: `false`<br>
+默认值: `true`
+
+是否可以整体移动, 为false时, 会把拖动的效果限制为: 只能拖动左右边界
+
 #### w
 类型: `Number`<br>
 必要性: `false`<br>
